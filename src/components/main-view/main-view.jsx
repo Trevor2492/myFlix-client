@@ -8,7 +8,7 @@ export class MainView extends React.Component {
 		super(); // This calls the superclass constructor so React can initialize it
 
 		this.state = {
-			movies: null,
+			movies: [],
 			selectedMovie: null
 		}; // Initializes the state to an empty object so we can destructure it later
 	}
