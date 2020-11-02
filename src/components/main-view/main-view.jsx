@@ -8,14 +8,14 @@ export class MainView extends React.Component {
 		super(); // This calls the superclass constructor so React can initialize it
 
 		this.state = {
-			movies: [],
+			movies: null,
 			selectedMovie: null
 		}; // Initializes the state to an empty object so we can destructure it later
 	}
 
 	// One of the "hooks" available in a React component
 	componentDidMount(){
-		axios.get('<https://trevors-movies-api.herokuapp.com/movies>')
+		axios.get('https://trevors-movies-api.herokuapp.com/movies')
 			.then (response => {
 				this.setState({ //Assign the result to the state
 					movies: response.data
@@ -40,7 +40,7 @@ export class MainView extends React.Component {
 		return ( 
 			<div className="main-view">
 				{selectedMovie
-					? <MovieView movie={selectedMovie}/>
+					? <MovieView movie={selectedMovie} onClick={movie => this.onMovieClick(movie)}/>
 					:	movies.map(movie => (
 						<MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
 					))

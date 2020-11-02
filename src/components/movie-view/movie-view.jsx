@@ -1,4 +1,5 @@
 import React from 'react';
+import { MainView } from '../main-view/main-view';
 
 export class MovieView extends React.Component{
 
@@ -9,7 +10,7 @@ export class MovieView extends React.Component{
 	}
 
 	render() {
-		const {movie} = this.props;
+		const {movie, onClick} = this.props;
 
 		if (!movie) return null;
 
@@ -33,7 +34,7 @@ export class MovieView extends React.Component{
 					<span className="value">{movie.Director.Name}</span>
 				</div>
 
-				<button onClick={() => onClick(movie)} className="back-button">Back</button>
+				<button onClick={() => onClick(!movie)} className="back-button">Back</button>
 			</div>
 		);
 	}
