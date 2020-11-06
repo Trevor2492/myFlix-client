@@ -1,0 +1,27 @@
+.movie-view_card {
+  width: 27rem;
+  justify-content: center;
+  margin: 15px;
+  border-radius: 25px;
+}
+
+.movie-view_image {
+  border-radius: 25px;
+}
+
+.back-button {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0, 0);
+  color: black;
+  border: 1px black solid;
+}
+
+.movie-view_button {
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0, 0);
+  color: black;
+  border: 1px black solid;
+}

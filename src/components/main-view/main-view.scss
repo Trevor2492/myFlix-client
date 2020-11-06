@@ -1,0 +1,11 @@
+body {
+  background-color: rgba(167, 212, 167, 0.278);
+}
+
+.main-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-between;
+}
