@@ -1,7 +1,8 @@
 import React, { useState } from 'react'; //This "useState" hook allows us to avoid the use of the component lifecycle methods
-import { RegistrationView } from '../registration-view/registration-view';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './login-view.scss';
 
 export function LoginView(props) {
@@ -10,15 +11,18 @@ export function LoginView(props) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault(); // This prevents the default refresh of the page from the handleSubmit() method. Without it the page will refresh, which isn't the user experience we want
-		console.log(username, password);
-		// send a request here to the server for authentication
-		props.onLoggedIn(username); // This is just a quick workaround for the authentication for the app. It allows you to input anything into the username and password and still works
+		axios.post('https://trevors-movies-api.herokuapp.com/login', {
+			Username: username, 
+			Password: password
+		})
+		.then(response => {
+			const data = response.data;
+			props.onLoggedIn(data);
+		})
+		.catch(e => {
+			console.log('no such user')
+		});
 	};
-
-	const regView = () => {
-		console.log('something');
-		return <RegistrationView/>;
-	}
 
 	return(
 		<div>
@@ -36,10 +40,19 @@ export function LoginView(props) {
 					<Form.Label>Password</Form.Label>
 					<Form.Control className="input" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
 				</Form.Group>
+
 				<Button className="form-button" variant="primary" type="submit" onClick={handleSubmit}>
-					Submit
+					Login
 				</Button>
+				<div className="new-user">
+					New User?
+				</div>
+					<Link to={`/register`}>
+						<Button className="register-button" variant="link">Register Here</Button>
+					</Link>
+				
 			</Form>
+			
 		</div>
 	);
 

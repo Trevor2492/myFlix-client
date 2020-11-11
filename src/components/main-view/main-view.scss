@@ -1,5 +1,9 @@
 body {
-  background-color: rgba(167, 212, 167, 0.278);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #ffffff;
+  background-image: linear-gradient(160deg, #d8f0a8 25%, #fdfcfb 75%);
 }
 
 .main-view {
@@ -8,4 +12,12 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-between;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+}
+.nav-item {
 }
