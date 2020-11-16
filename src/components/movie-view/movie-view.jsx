@@ -2,26 +2,48 @@ import React, { useReducer } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 import './movie-view.scss';
 
 
 export class MovieView extends React.Component{
 
-	constructor() {
-		super();
-
-		this.state = {};
+	likeMovie(){
+		const token = localStorage.token;
+		axios.post(`https://trevors-movies-api.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {}, {
+			headers: {Authorization: `Bearer ${token}`} //Passing this bearer authorization in the header of the http request allows me to make authenticated requests to the API
+		})
+		.then(()=> {
+			this.props.getUser();
+		})
+		.catch((error) => {
+			console.log(error);
+		})
 	}
 
-	favMovie(){
-		user.FavoriteMovies.push(movie); // This is where the issue is happening. 'user' is defined as a string='trevortest', which is the username for this user. It needs to be the whole user object.
-		console.log('You liked that movie'); 
+	dislikeMovie(){
+		const token = localStorage.token;
+		axios.delete(`https://trevors-movies-api.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {
+			headers: {Authorization: `Bearer ${token}`} //Passing this bearer authorization in the header of the http request allows me to make authenticated requests to the API
+		})
+		.then(()=> {
+			this.props.getUser();
+		})
+		.catch((error) => {
+			console.log(error);
+		})
 	}
 
 	render() {
-		const {movie, user} = this.props;
-
+		const {movie, user, getUser} = this.props;
+		console.log(user.FavoriteMovies);
 		if (!movie) return null;
+		const liked = (user.FavoriteMovies || []).indexOf(movie._id) !== -1;
+		const handleClick = () => {
+			return liked ? this.dislikeMovie() : this.likeMovie()
+		}
+		const buttonClass = liked ? "liked_button" : "disliked_button";
 
 		return(
 		<div>
@@ -52,7 +74,7 @@ export class MovieView extends React.Component{
 						<Link to={`/genres/${movie.Genre.Name}`}>
 							<Button className="movie-view_button" variant="primary">Genre</Button>
 						</Link>
-						<Button className="movie-view_button" variant="primary" onClick={() => this.favMovie()}>&#9825;</Button>
+						<Button className={buttonClass} variant="primary" onClick={handleClick}>&#9825;</Button>
 					</div>
 				</Card.Body>
 			</Card>

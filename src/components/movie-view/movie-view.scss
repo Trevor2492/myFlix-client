@@ -27,6 +27,20 @@
   border: 1px black solid;
 }
 
+.disliked_button {
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0, 0);
+  color: black;
+  border: 1px black solid;
+}
+
+.liked_button {
+  border-radius: 10px;
+  background-color: rgba(240, 47, 137, 0.94);
+  color: black;
+  border: 1px black solid;
+}
+
 .movie-view_buttons {
   display: flex;
   justify-content: space-around;

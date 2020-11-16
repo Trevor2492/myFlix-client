@@ -10,6 +10,10 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { ProfileView } from '../profile-view/profile-view';
+import { UpdateProfile } from '../update-profile/update-profile';
+
 
 import './main-view.scss';
 
@@ -20,7 +24,8 @@ export class MainView extends React.Component {
 
 		this.state = {
 			movies: [],
-			user: null
+			user: {}
+
 		}; // Initializes the state to an empty object so we can destructure it later
 	}
 
@@ -29,23 +34,35 @@ export class MainView extends React.Component {
 		let	accessToken = localStorage.getItem('token'); //This gets the value of the token from localStorage in the clients browser
 
 		if (accessToken !== null){
-			this.setState({
-				user: localStorage.getItem('user')
-			});
 			this.getMovies(accessToken);
+			this.getUser();
 		}
-	
+	}
+
+	getUser(){
+		const token = localStorage.token;
+		let url = 'https://trevors-movies-api.herokuapp.com/users/' + localStorage.user;
+
+		axios.get(url, {
+			headers: {Authorization: `Bearer ${token}`} //Passing this bearer authorization in the header of the http request allows me to make authenticated requests to the API
+		})
+		.then(response => {
+			this.setState({
+				user: response.data
+			});
+		})
+		.catch(function(error) {
+			console.log(error);
+		});
 	}
 
 	onLoggedIn(authData) { // This method gets triggered when the user logs in the LoginView
 		console.log(authData);
-		this.setState({
-			user: authData.user.Username //the users username is saved in the user state
-		});
 
 		localStorage.setItem('token', authData.token); //localStorage is a way to store data in the client's browser. the "setItem" method accepts a key and a value
 		localStorage.setItem('user', authData.user.Username);
 		this.getMovies(authData.token);
+		this.getUser();
 	}
 
 	getMovies(token) {
@@ -67,9 +84,10 @@ export class MainView extends React.Component {
 		localStorage.removeItem('user');
 
 		this.setState({ // resets the user state to null, thus logging them out. Also sets the selectedMovie to null which resets the movie view on login
-			user: null,
+			user: {},
 		});
 		console.log('you were logged out');
+		window.open('/', '_self'); //_self is necessary so that the page will open in the current tab
 	}
 
 	render() { 
@@ -77,21 +95,25 @@ export class MainView extends React.Component {
 
 		return ( 
 			<div>
+
+				<Router>
 				<nav className="nav">
-					<Button className="nav-item" variant="link">My Account</Button>
+					<Link to='/users/:Username'>
+						<Button className="nav-item" variant="link">My Account</Button>
+					</Link>
 					<Button className="nav-item" variant="link" onClick={() => this.logOut()}>Logout</Button>
 				</nav>
 
-				<Router>
 					<div className="main-view">
 						<Route exact path="/" render={() => {
-							if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-							return movies.map(m => <MovieCard key={m._id} movie={m} />)
+							if (Object.keys(user).length === 0) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+							return movies.map(m => <MovieCard key={m._id} movie={m} onClick={() => {}}/>)
 							}
 						}/>
+
 						<Route path="/register" render={() => <RegistrationView/>} />
 
-						<Route exact path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} user={user}/>}/>
+						<Route exact path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} user={user} getUser={() => this.getUser()}/>}/>
 
 						<Route exact path="/genres/:name" render={({match}) => {if (!movies) return <div className="main-view"/>;
 							return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>}}/>
@@ -99,7 +121,10 @@ export class MainView extends React.Component {
 						<Route exact path="/directors/:name" render={({match}) => {if (!movies) return <div className="main-view"/>;
 							return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>}}/>
 
-						<Route exact path="/users" render={() => <RegistrationView/>}/>
+						<Route exact path="/users/:Username" render={() => <ProfileView movies={movies}/>}/>
+
+						<Route exact path="/users/update" render={() => <UpdateProfile/>}/>
+
 					</div>
 				</Router>
 			</div>

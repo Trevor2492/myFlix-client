@@ -1,0 +1,41 @@
+.profile-view_card {
+  width: 27rem;
+  justify-content: center;
+  margin: 15px;
+  border-radius: 25px;
+  box-shadow: 3px 2px 30px rgb(0, 0, 0, 0.5);
+  padding-top: 25px;
+}
+
+.back-button {
+  position: fixed;
+  left: 20px;
+  top: 40px;
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0, 0);
+  color: black;
+  border: 1px black solid;
+}
+
+.card-text {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.profile-button {
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0, 0);
+  color: black;
+  border: 1px black solid;
+}
+
+.delete-button {
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0, 0);
+  color: red;
+  border: 1px red solid;
+}
+
+h1 {
+  text-align: center;
+}
