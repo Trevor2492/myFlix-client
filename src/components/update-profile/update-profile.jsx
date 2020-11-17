@@ -22,8 +22,8 @@ export function UpdateProfile(props) {
         {
           Username: username,
           Password: password,
-          Birthday: birthday,
           Email: email,
+          Birthday: birthday,
         },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -33,6 +33,8 @@ export function UpdateProfile(props) {
         const data = res.data;
         console.log(data);
         alert("Profile updated");
+        localStorage.removeItem('token'); // removes the user's credentials from the browser
+        localStorage.removeItem('user');
         window.open("/", "_self");
       })
       .catch((e) => {

@@ -17,7 +17,7 @@ export class GenreView extends React.Component{
 		const {genre} = this.props;
 
 		if (!genre) return null;
-
+		
 		return(
 		<div>
 			<Card className="genre_card">

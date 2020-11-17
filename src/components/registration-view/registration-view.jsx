@@ -24,9 +24,11 @@ export function RegistrationView(props) {
 			const data = response.data;
 			console.log(data);
 			window.open('/', '_self'); //_self is necessary so that the page will open in the current tab
+			alert('Your account was created successfully.');
 		})
 		.catch(e => {
-			console.log('error registering the user')
+			console.log('error registering the user');
+			alert('Unable to register. Check to make sure each of the field requirements are met.');
 		});
 	};
 
@@ -38,18 +40,24 @@ export function RegistrationView(props) {
 					<Form.Label>Username</Form.Label>
 					<Form.Control className="input" type="username" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)}/>
 					<Form.Text className="text-muted">
-						We'll never share your username with anyone else.
+						Username must be at least 5 characters. Non-alphanumeric characters are not allowed.
 					</Form.Text>
 				</Form.Group>
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Password</Form.Label>
 					<Form.Control className="input" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
+					<Form.Text className="text-muted">
+						Password is required.
+					</Form.Text>
 				</Form.Group>
 
 				<Form.Group controlId="formBasicEmail">
 					<Form.Label>Email</Form.Label>
 					<Form.Control className="input" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+					<Form.Text className="text-muted">
+						Must be a valid email.
+					</Form.Text>
 				</Form.Group>
 
 				<Form.Group controlId="formBasicBirthday">

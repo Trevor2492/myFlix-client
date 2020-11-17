@@ -80,8 +80,9 @@ export class ProfileView extends React.Component {
         }
       )
       .then((response) => {
-        alert("Account deleted");
-        localStorage.removeItem("token", "user");
+        alert("Your account was successfully deleted");
+        localStorage.removeItem('token'); // removes the user's credentials from the browser
+        localStorage.removeItem('user');    
         window.open("/", "_self");
       })
       .catch((event) => {

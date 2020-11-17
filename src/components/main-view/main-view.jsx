@@ -13,8 +13,6 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { ProfileView } from '../profile-view/profile-view';
 import { UpdateProfile } from '../update-profile/update-profile';
-
-
 import './main-view.scss';
 
 
