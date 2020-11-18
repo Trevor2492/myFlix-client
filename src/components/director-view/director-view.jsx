@@ -14,18 +14,32 @@ export class DirectorView extends React.Component{
 	}
 
 	render() {
-		const {director, movie} = this.props;
+		const {director, movies} = this.props;
 
 		if (!director) return null;
+
+		const directorList = movies.filter(m => m.Director.Name === this.props.director.Name); //This filters the list of movies by the "comedy" genre and assigns them to "genreList"
+
 
 		return(
 		<div>
 			<Card className="director_card">
 				<Card.Img variant="top" className="card-img" src={director.Image} />
 				<Card.Body>
-					<Card.Title>{director.Name}</Card.Title>
+					<Card.Title><span className="section-header">{director.Name}</span></Card.Title>
 					<Card.Text>{director.Bio}</Card.Text>
 					<Card.Text>Birth: {director.Birth}</Card.Text>
+					<Card.Text>
+							<span className="section-header">Movies by this Director:</span> <br/><br/>
+							{directorList.map(m => (
+								<div>
+									<Link to={`/movies/${m._id}`}>
+										{m.Title}
+									</Link>
+								</div>
+								))}
+								<br/>
+					</Card.Text>
 					<Link to={`/`}>
 						<Button className="button" variant="outline-primary">Back</Button>
 					</Link>
