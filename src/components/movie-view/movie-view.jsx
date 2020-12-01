@@ -3,11 +3,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import './movie-view.scss';
 
 
-export class MovieView extends React.Component{
+class MovieView extends React.Component{
 
 	likeMovie(){
 		const token = localStorage.token;
@@ -36,10 +37,16 @@ export class MovieView extends React.Component{
 	}
 
 	render() {
-		const {movie, user, getUser} = this.props;
+		const {movie, getUser} = this.props;
+
+		const user = this.props.getUser();
+
 		console.log(user.FavoriteMovies);
+
 		if (!movie) return null;
+
 		const liked = (user.FavoriteMovies || []).indexOf(movie._id) !== -1;
+
 		const handleClick = () => {
 			return liked ? this.dislikeMovie() : this.likeMovie()
 		}
@@ -83,3 +90,9 @@ export class MovieView extends React.Component{
 	}
 
 }
+
+const mapStateToProps = state => {
+	return state
+};
+
+export default connect(mapStateToProps)(MovieView);

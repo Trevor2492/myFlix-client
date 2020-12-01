@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
+import { connect } from "react-redux";
 
 
 //Styling
@@ -11,7 +12,7 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import './profile-view.scss';
 
-export class ProfileView extends React.Component {
+class ProfileView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -151,3 +152,5 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+export default connect((state) => state)(ProfileView);

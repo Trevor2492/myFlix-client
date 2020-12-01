@@ -1,0 +1,13 @@
+.filter {
+  display: block;
+  margin: 0 auto;
+  max-width: max-content;
+  border-radius: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  justify-content: center;
+}
