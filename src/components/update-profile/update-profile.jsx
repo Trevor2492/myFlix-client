@@ -15,7 +15,6 @@ export function UpdateProfile(props) {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log();
     axios
       .put(
         `https://trevors-movies-api.herokuapp.com/users/${localStorage.getItem("user")}`,
@@ -35,6 +34,7 @@ export function UpdateProfile(props) {
         alert("Profile updated");
         localStorage.removeItem('token'); // removes the user's credentials from the browser
         localStorage.removeItem('user');
+        console.log('Your profile has been updated. You\'ll be asked to login again');
         window.open("/", "_self");
       })
       .catch((e) => {
@@ -42,6 +42,7 @@ export function UpdateProfile(props) {
         alert("Error updating user. Please make sure to fill each section.");
       });
   };
+
 
   return (
     <Container className="UpdateContainer">

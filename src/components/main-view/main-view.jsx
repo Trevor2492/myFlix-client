@@ -7,14 +7,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { setMovies, setUser, logoutUser } from '../../actions/actions';
 
-import MoviesList from '../movies-list/movies-list'; //We haven't built this one yet
+import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import MovieView from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import GenreView from '../genre-view/genre-view';
 import DirectorView from '../director-view/director-view';
 import ProfileView from '../profile-view/profile-view';
-import { UpdateProfile } from '../update-profile/update-profile';
+import { UpdateProfile} from '../update-profile/update-profile';
 
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';

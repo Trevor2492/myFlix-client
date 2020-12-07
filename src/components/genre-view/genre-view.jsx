@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from 'prop-types';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
@@ -52,3 +53,15 @@ class GenreView extends React.Component {
 }
 
 export default connect((state) => state)(GenreView);
+
+GenreView.propTypes = {
+  movie: propTypes.shape({
+    Title: propTypes.string.isRequired,
+    Description: propTypes.string.isRequired,
+    ImagePath: propTypes.string.isRequired
+  }),
+  genre: propTypes.shape({
+    Name: propTypes.string.isRequired,
+    Description: propTypes.string.isRequired
+  }) 
+};

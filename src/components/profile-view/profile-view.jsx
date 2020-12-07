@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from 'prop-types';
 //Routing
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -38,7 +39,6 @@ class ProfileView extends React.Component {
     axios.get(`https://trevors-movies-api.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-
       .then((res) => {
         this.setState({
           Username: res.data.Username,
@@ -100,8 +100,6 @@ class ProfileView extends React.Component {
       <div>
         <Container>
           <Col>
-            
-
             <Card className="profile-view_card">
             <h1>My Profile</h1>
             <br />
@@ -154,3 +152,11 @@ class ProfileView extends React.Component {
 }
 
 export default connect((state) => state)(ProfileView);
+
+ProfileView.propTypes = {
+  movie: propTypes.shape({
+    Title: propTypes.string.isRequired,
+    Description: propTypes.string.isRequired,
+    ImagePath: propTypes.string.isRequired
+  })
+};

@@ -1,11 +1,10 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './movies-list.scss';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { MovieCard } from '../movie-card/movie-card';
-
-
 
 function MoviesList(props) {
   const { movies, visibilityFilter } = props;
@@ -29,8 +28,15 @@ function MoviesList(props) {
 
 const mapStateToProps = state => {
 	return state
-  // const { visibilityFilter } = state;
-  // return { visibilityFilter };
 };
 
 export default connect(mapStateToProps)(MoviesList);
+
+MoviesList.propTypes = {
+	movie: propTypes.shape({
+    Title: propTypes.string.isRequired,
+    Description: propTypes.string.isRequired,
+    ImagePath: propTypes.string.isRequired
+	}),
+	visibilityFilter: propTypes.string.isRequired 
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import propTypes from 'prop-types';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
@@ -13,7 +14,7 @@ class DirectorView extends React.Component {
 
     const directorList = movies.filter(
       (m) => m.Director.Name === this.props.director.Name
-    ); //This filters the list of movies by the "comedy" genre and assigns them to "genreList"
+    ); //This filters the list of movies by the director name and assigns them to "directorList"
 
     return (
       <div>
@@ -56,3 +57,17 @@ class DirectorView extends React.Component {
 }
 
 export default connect((state) => state)(DirectorView);
+
+DirectorView.propTypes = {
+    movie: propTypes.shape({
+      Title: propTypes.string.isRequired,
+      Description: propTypes.string.isRequired,
+      ImagePath: propTypes.string.isRequired
+    }),
+    director: propTypes.shape({
+      Name: propTypes.string.isRequired,
+      Bio: propTypes.string.isRequired,
+      Birth: propTypes.string.isRequired,
+      Death: propTypes.string.isRequired
+    })
+};

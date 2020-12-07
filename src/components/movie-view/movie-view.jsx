@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import propTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
@@ -39,7 +40,7 @@ class MovieView extends React.Component{
 	render() {
 		const {movie, getUser} = this.props;
 
-		const user = this.props.getUser();
+		const user = this.props.user;
 
 		console.log(user.FavoriteMovies);
 
@@ -96,3 +97,12 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(MovieView);
+
+MovieView.propTypes = {
+	movie: propTypes.shape({
+    Title: propTypes.string.isRequired,
+    Description: propTypes.string.isRequired,
+    ImagePath: propTypes.string.isRequired
+	}),
+	getUser: propTypes.func.isRequired
+};

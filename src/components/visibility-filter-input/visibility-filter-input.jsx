@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
@@ -19,3 +19,11 @@ export default connect(
   null,
   { setFilter }
 )(VisibilityFilterInput);
+
+VisibilityFilterInput.propTypes = {
+	movie: propTypes.shape({
+		Title: propTypes.string.isRequired,
+		Description: propTypes.string.isRequired,
+		ImagePath: propTypes.string.isRequired
+	})
+};
