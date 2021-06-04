@@ -44,7 +44,7 @@ class ProfileView extends React.Component {
           Username: res.data.Username,
           Password: res.data.Password,
           Email: res.data.Email,
-          Birthday: res.data.Birthday,
+          Birthday: res.data.Birthday.slice(0, 10),
           FavoriteMovies: res.data.FavoriteMovies,
         });
       })

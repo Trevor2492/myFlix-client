@@ -11,6 +11,8 @@ https://myflix-app.netlify.app
 To start the dev server first install
 
 ```bash
+npm install -g parcel@next
+
 npm install -g parcel-bundler
 
 npm install --save react react-dom
@@ -24,4 +26,10 @@ then run
 
 ```bash
 parcel src/index.html
+```
+
+or
+
+```bash
+npx parcel src/index.html
 ```

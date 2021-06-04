@@ -101,12 +101,14 @@ export class MainView extends React.Component {
 			<div>
 
 				<Router>
-				<nav className="nav">
-					<Link to='/users/:Username'>
-						<Button className="nav-item" variant="link">My Account</Button>
-					</Link>
-					<Button className="nav-item" variant="link" onClick={() => this.logOut()}>Logout</Button>
-				</nav>
+					{localStorage.user && 
+						<nav className="nav">
+							<Link to='/users/:Username'>
+								<Button className="nav-item" variant="link">My Account</Button>
+							</Link>
+							<Button className="nav-item" variant="link" onClick={() => this.logOut()}>Logout</Button>
+						</nav>
+					}
 
 					<div className="main-view">
 						<Route exact path="/" render={() => {

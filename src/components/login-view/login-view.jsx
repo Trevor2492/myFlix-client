@@ -27,7 +27,7 @@ export function LoginView(props) {
 
 	return(
 		<div>
-			<div className="login-view_header">Movie App</div>
+			<div className="login-view_header">MyFlix</div>
 			<Form className="login-form">
 				<Form.Group controlId="formBasicEmail">
 					<Form.Label>Username</Form.Label>
