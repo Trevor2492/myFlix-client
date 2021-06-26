@@ -3,10 +3,12 @@
 }
 
 .movie-card_card {
+  color: rgb(44, 44, 44);
   width: 20rem;
   margin: 25px;
   border-radius: 25px;
   box-shadow: 3px 2px 15px rgb(0, 0, 0, 0.5);
+  max-height: fit-content;
 }
 
 .movie-card_card:hover {
@@ -20,6 +22,7 @@
 
 .card-img {
   border-radius: 25px;
+  max-height: 450px;
 }
 
 .card-button {
