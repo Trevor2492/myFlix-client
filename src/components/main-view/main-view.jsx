@@ -1,12 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
-
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import { setMovies, setUser, logoutUser } from '../../actions/actions';
-
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import MovieView from '../movie-view/movie-view';
@@ -69,10 +65,6 @@ export class MainView extends React.Component {
 		})
 		.then(response => {
 			const action = setMovies(response.data)
-			// const action = { 
-			// 	type: "SET_MOVIES",
-			// 	value: response.data 
-			// }
 			this.props.dispatch(action) // dispatches an object or an "action"
 		})
 		.catch(function(error) {
@@ -86,9 +78,6 @@ export class MainView extends React.Component {
 
 		const action = logoutUser({});
 		this.props.dispatch(action); // dispatches an object or an "action"
-		// this.setState({ // resets the user state to null, thus logging them out. Also sets the selectedMovie to null which resets the movie view on login
-		// 	user: {},
-		// });
 		console.log('you were logged out');
 		window.open('/', '_self'); //_self is necessary so that the page will open in the current tab
 	}
